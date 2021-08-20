@@ -21,3 +21,5 @@ if ( ! function_exists('side_theme_setup') ) {
         );
     }
 }
+
+add_filter( 'show_admin_bar', '__return_false' );

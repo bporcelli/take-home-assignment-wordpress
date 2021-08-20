@@ -1,12 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+
 :root {
     --global--font-primary: 'Open Sans', sans-serif;
     --global--font-secondary: 'Open Sans', sans-serif;
     --global--color-background: white;
 }
+
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.page {
+  #masthead {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    max-width: none;
+    background: #F4F4F4;
+    border: none;
+    padding: 30px 0;
+    margin-bottom: 38px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    row-gap: 0;
+
+    h1.entry-title {
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 40px;
+      width: 100%;
+      max-width: var(--responsive--alignwide-width);
+      margin: 0 auto;
+    }
+  }
+
+  main#main {
+    padding-top: 0;
+  }
 }

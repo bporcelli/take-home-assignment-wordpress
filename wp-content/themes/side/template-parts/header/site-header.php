@@ -14,5 +14,7 @@ $wrapper_classes .= has_nav_menu( 'primary' ) ? ' has-menu' : '';
 ?>
 
 <header id="masthead" class="<?php echo esc_attr( $wrapper_classes ); ?>" role="banner">
-
+	<?php if ( is_singular( 'page' ) ) : ?>
+		<h1 class="entry-title"><?php the_title(); ?></h1>
+	<?php endif; ?>
 </header><!-- #masthead -->
