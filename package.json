@@ -8,6 +8,7 @@
     "test": "cypress open"
   },
   "devDependencies": {
+    "@bigbite/wp-cypress": "^0.9.2",
     "@testing-library/cypress": "8.0.0",
     "cypress": "8.3.0"
   }
