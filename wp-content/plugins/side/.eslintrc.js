@@ -1,3 +1,3 @@
 module.exports = {
-    "extends": "eslint:recommended",
-}
+    "extends": ["plugin:@wordpress/eslint-plugin/esnext"]
+};

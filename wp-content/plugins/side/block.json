@@ -1,0 +1,24 @@
+{
+  "apiVersion": 2,
+  "name": "side/property-list",
+  "title": "Property List",
+  "category": "widgets",
+  "icon": "grid-view",
+  "description": "Display a list of properties pulled from the SimplyRETS API.",
+  "keywords": [ "property", "list" ],
+  "version": "1.0.0",
+  "textdomain": "side",
+  "editorScript": "file:./build/editor.js",
+  "script": "file:./build/front.js",
+  "editorStyle": "file:./build/editor.css",
+  "style": "file:./build/front.css",
+  "supports": {
+    "align": ["wide"]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "wide"
+    }
+  }
+}
