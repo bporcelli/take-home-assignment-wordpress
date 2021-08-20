@@ -1,14 +1,12 @@
 /**
  * Get property list data from SimplyRETS properties endpoint or local storage.
  *
- * @param {boolean} bypassCache Set to true to bypass cache. Useful for development.
- *
  * @return Promise
  */
-export function getPropertyData(bypassCache = false) {
+export function getPropertyData() {
 	const cachedPropertyData = localStorage.getItem('sidePropertyData');
 
-	if (cachedPropertyData && !bypassCache) {
+	if (cachedPropertyData) {
 		return Promise.resolve(JSON.parse(cachedPropertyData));
 	}
 
