@@ -3,8 +3,27 @@
  *
  * @return Promise
  */
-export function getPropertyData() {
-	const cachedPropertyData = localStorage.getItem('sidePropertyData');
+export function getPropertyData(params) {
+	const defaultParams = {
+		limit: 9,
+		sort: 'listprice',
+		minPrice: 0,
+		maxPrice: Number.MAX_SAFE_INTEGER,
+	};
+
+	params = Object.assign(defaultParams, params);
+
+	const searchParams = new URLSearchParams();
+
+	searchParams.append('limit', params.limit);
+	searchParams.append('sort', params.sort);
+	searchParams.append('minprice', params.minPrice);
+	searchParams.append('maxprice', params.maxPrice);
+
+	const queryParams = searchParams.toString();
+	const cacheKey    = `sidePropertyData:${queryParams}`;
+
+	const cachedPropertyData = localStorage.getItem(cacheKey);
 
 	if (cachedPropertyData) {
 		return Promise.resolve(JSON.parse(cachedPropertyData));
@@ -18,7 +37,7 @@ export function getPropertyData() {
 		headers: headers,
 	};
 
-	return fetch('https://api.simplyrets.com/properties?limit=9', requestConfig)
+	return fetch(`https://api.simplyrets.com/properties?${queryParams}`, requestConfig)
 		.then(response => {
 			if (!response.ok) {
 				throw `${response.status} ${response.statusText}`;
@@ -59,4 +78,14 @@ export function toggleFavorite(mlsId) {
 	}
 
 	localStorage.setItem('sideFavoriteProperties', JSON.stringify(favorites));
+}
+
+export function debounce(func, timeout = 300){
+	let timer;
+	return (...args) => {
+		clearTimeout(timer);
+		timer = setTimeout(() => {
+			func.apply(this, args);
+		}, timeout);
+	};
 }

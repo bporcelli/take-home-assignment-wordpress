@@ -2,7 +2,7 @@
  * Styles applied in the editor and on the frontend.
  */
 
-.property-list {
+.property-list-wrapper {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	grid-column-gap: 55px;
@@ -93,5 +93,15 @@
 		&:last-child {
 			margin-bottom: 0;
 		}
+	}
+}
+
+.property-list-filters {
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+
+	input[type="number"] {
+		margin-bottom: 0;
 	}
 }

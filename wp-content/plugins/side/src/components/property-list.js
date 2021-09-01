@@ -2,6 +2,7 @@ import {Component} from '@wordpress/element';
 import {getFavoriteProperties, getPropertyData, toggleFavorite} from "../util";
 import PropertyListPlaceholder from './property-list-placeholder';
 import PropertyListItem from "./property-list-item";
+import PropertyListFilters from "./property-list-filters";
 
 /**
  * Renders a list of properties.
@@ -12,7 +13,9 @@ class PropertyList extends Component {
 
 		this.state = {
 			properties: [],
-			favorites: getFavoriteProperties()
+			favorites: getFavoriteProperties(),
+			minPrice: 0,
+			maxPrice: Number.MAX_SAFE_INTEGER,
 		};
 
 		this.onToggleFavorite = this.onToggleFavorite.bind(this);
@@ -22,7 +25,16 @@ class PropertyList extends Component {
 	 * Runs after component is mounted into DOM to get property data.
 	 */
 	componentDidMount() {
-		getPropertyData().then(properties => {
+		this.updatePropertyList();
+	}
+
+	updatePropertyList() {
+		const params = {
+			minPrice: this.state.minPrice,
+			maxPrice: this.state.maxPrice,
+		};
+
+		getPropertyData(params).then(properties => {
 			this.setState({properties: properties});
 		});
 	}
@@ -37,6 +49,36 @@ class PropertyList extends Component {
 
 		this.setState({
 			favorites: getFavoriteProperties()
+		});
+	}
+
+	/**
+	 * Handles a change to the min price.
+	 *
+	 * @param {float} minPrice
+	 */
+	onMinPriceChanged(minPrice) {
+		this.setState((state) => {
+			return {
+				minPrice: minPrice,
+			};
+		}, () => {
+			this.updatePropertyList();
+		});
+	}
+
+	/**
+	 * Handles a change to the max price.
+	 *
+	 * @param {float} maxPrice
+	 */
+	onMaxPriceChanged(maxPrice) {
+		this.setState((state) => {
+			return {
+				maxPrice: maxPrice,
+			};
+		}, () => {
+			this.updatePropertyList();
 		});
 	}
 
@@ -59,9 +101,12 @@ class PropertyList extends Component {
 		}
 
 		return (
-			<div className="property-list">
-				{propertyList}
-			</div>
+			<>
+				<PropertyListFilters onMinPriceChanged={this.onMinPriceChanged.bind(this)} onMaxPriceChanged={this.onMaxPriceChanged.bind(this)} />
+				<div className="property-list-wrapper">
+					{propertyList}
+				</div>
+			</>
 		);
 	}
 }
