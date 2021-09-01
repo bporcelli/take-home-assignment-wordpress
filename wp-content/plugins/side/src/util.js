@@ -7,22 +7,19 @@ export function getPropertyData(params) {
 	const defaultParams = {
 		limit: 9,
 		sort: 'listprice',
-		minPrice: 0,
-		maxPrice: Number.MAX_SAFE_INTEGER,
+		minprice: 0,
+		maxprice: Number.MAX_SAFE_INTEGER,
 	};
 
 	params = Object.assign(defaultParams, params);
 
 	const searchParams = new URLSearchParams();
-
-	searchParams.append('limit', params.limit);
-	searchParams.append('sort', params.sort);
-	searchParams.append('minprice', params.minPrice);
-	searchParams.append('maxprice', params.maxPrice);
+	for (let [param, value] of Object.entries(params)) {
+		searchParams.append(param, value);
+	}
 
 	const queryParams = searchParams.toString();
-	const cacheKey    = `sidePropertyData:${queryParams}`;
-
+	const cacheKey = `sidePropertyData:${queryParams}`;
 	const cachedPropertyData = localStorage.getItem(cacheKey);
 
 	if (cachedPropertyData) {

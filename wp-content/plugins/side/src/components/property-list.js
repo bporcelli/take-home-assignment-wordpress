@@ -30,8 +30,8 @@ class PropertyList extends Component {
 
 	updatePropertyList() {
 		const params = {
-			minPrice: this.state.minPrice,
-			maxPrice: this.state.maxPrice,
+			minprice: this.state.minPrice,
+			maxprice: this.state.maxPrice,
 		};
 
 		getPropertyData(params).then(properties => {
